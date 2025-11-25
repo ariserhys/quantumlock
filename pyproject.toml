@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantumlock"
+version = "0.1.0"
+description = "Advanced Password Generator & Strength Analyzer"
+authors = [{name = "QuantumLock Team"}]
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+keywords = ["password", "generator", "security", "totp", "2fa"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "pydantic>=2.5.3",
+    "pydantic-settings>=2.1.0",
+    "cryptography>=42.0.0",
+    "argon2-cffi>=23.1.0",
+    "pyotp>=2.9.0",
+    "zxcvbn>=4.4.28",
+    "requests>=2.31.0",
+    "httpx>=0.26.0",
+    "sqlalchemy>=2.0.25",
+    "typer[all]>=0.9.0",
+    "rich>=13.7.0",
+    "questionary>=2.0.1",
+    "pyperclip>=1.8.2",
+    "qrcode[pil]>=7.4.2",
+    "Pillow>=10.2.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.3",
+    "ruff>=0.1.14",
+    "mypy>=1.8.0",
+    "bandit>=1.7.6",
+]
+
+[project.scripts]
+quantumlock = "cli.main:app"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/QuantumLock"
+Documentation = "https://github.com/yourusername/QuantumLock#readme"
+Repository = "https://github.com/yourusername/QuantumLock"
+Issues = "https://github.com/yourusername/QuantumLock/issues"
+
+[tool.setuptools.packages.find]
+include = ["backend*", "cli*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=backend --cov=cli --cov-report=html --cov-report=term"
